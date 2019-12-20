@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>igo-js example</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+    <script src="../dist/igo.js"></script>
+    <script>
+      'use strict';
+      igo.fetchDic('../naist-jdic', true).then(function () {
+        var html = igo.parse('今日の天気は晴れです。').map(function (morpheme) {
+          return '<tr><td>' + morpheme.surface + '</td><td>' + morpheme.feature + '</td></tr>';
+        });
+        document.body.innerHTML = '<table border="1"><tbody>' + html.join('') + '</tbody></table>';
+      });
+    </script>
+  </body>
+</html>
